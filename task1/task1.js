@@ -1,4 +1,5 @@
 const employers = ['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann'];
+
 const sponsors = {
   cash: [40000, 5000, 30400, 12000],
   eu: ['SRL', 'PLO', 'J&K'],
@@ -13,11 +14,7 @@ let {
 } = sponsors
 
 function calcCash(cash) {
-  let total = 0;
-  cash.forEach(el => {
-    total += el;
-  });
-  return total;
+  return cash.reduce((a, b) => a + b);
 }
 const money = calcCash(cash);
 
@@ -26,7 +23,7 @@ let resultEmployers = employers
     if (name != '' && name.length > 0) {
       return name;
     }
-  }).map(name => name.toLowerCase());
+  }).map(name => name.toLowerCase().trim());
 
 const sponsor = [...eu, ...rus].join(' ');
 
@@ -44,4 +41,9 @@ function makeBusiness({
   console.log(`Note. Be careful with ${carefulSpons}. It's a huge risk.`)
 }
 
-makeBusiness({});
+makeBusiness({
+  cash: money,
+  employers: resultEmployers,
+  spons: sponsor,
+  carefulSpons: carefulSponsor
+});
