@@ -3,7 +3,7 @@ import React from "react";
 import PostListItem from "../post-list-item/post-list-item";
 import "./post-list.css";
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, onDelete }) => {
   const elements = posts
     .filter(item => {
       if (item.label && item.id) {
@@ -14,7 +14,11 @@ const PostList = ({ posts }) => {
       const { label: itemLabel, important: itemImportant, id } = el;
       return (
         <li key={id} className="list-group-item">
-          <PostListItem label={itemLabel} important={itemImportant} />
+          <PostListItem
+            label={itemLabel}
+            important={itemImportant}
+            onDeletePost={() => onDelete(id)}
+          />
         </li>
       );
     });
