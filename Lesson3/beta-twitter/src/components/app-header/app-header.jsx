@@ -15,11 +15,14 @@ const HeaderWrap = styled.div`
   }
 `;
 
-const AppHeader = () => {
+const AppHeader = props => {
+  const { countLike, allPost } = props;
   return (
     <HeaderWrap>
       <h1> Andry Skarinkin </h1>
-      <h2> 11 записей, из них понравилось 7 </h2>
+      <h2>
+        {allPost} записей, из них понравилось {countLike}
+      </h2>
     </HeaderWrap>
   );
 };
