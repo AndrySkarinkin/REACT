@@ -8,7 +8,8 @@ const PostList = ({
   onDelete,
   //onToggleImportant,
   //onToggleLiked,
-  onToggleLikeorImportant
+  onToggleLikeorImportant,
+  onToggleEdit
 }) => {
   const elements = posts
     .filter(item => {
@@ -26,6 +27,7 @@ const PostList = ({
             like={like}
             id={id}
             onDeletePost={() => onDelete(id)}
+            onToggleEdit={onToggleEdit}
             //onToggleImportant={() => onToggleImportant(id)}
             //onToggleLiked={() => onToggleLiked(id)}
             onToggleLikeorImportant={onToggleLikeorImportant}

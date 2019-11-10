@@ -1,0 +1,28 @@
+.edit-wrap {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.flex-wrap {
+  display: flex;
+}
+.edit-input {
+  height: 50px;
+  width: 500px;
+  outline: none;
+}
+.edit-button {
+  height: 40px;
+  width: 150px;
+  border-radius: 5px;
+  outline: none;
+  background: none;
+  border: 1px solid blue;
+  transition: 0.4s;
+}
+.edit-button:hover {
+  background: blue;
+  transition: 0.4s;
+  color: white;
+}

@@ -9,7 +9,8 @@ export default class PostListItem extends Component {
       like,
       id,
       onDeletePost,
-      onToggleLikeorImportant
+      onToggleLikeorImportant,
+      onToggleEdit
     } = this.props;
     let classNames = "app-list-item d-flex justify-content-between";
     if (important) {
@@ -26,7 +27,10 @@ export default class PostListItem extends Component {
         >
           {label}
         </span>
-        <div className="d-flex justify-content-center align-items-center">
+        <div className="  button-wrap">
+          <button id="btn-edit" onClick={() => onToggleEdit(id, label)}>
+            Редактировать
+          </button>
           <button
             type="button"
             className="btn-star btn-sm"
