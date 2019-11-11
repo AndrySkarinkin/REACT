@@ -4,6 +4,7 @@ export default class GotService extends Component {
   constructor(props) {
     super(props);
     this._apiBase = "https://www.anapioficeandfire.com/api";
+    this.getResource = this.getResource.bind(this);
   }
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -12,15 +13,46 @@ export default class GotService extends Component {
     }
     return await res.json();
   }
-
-  getAllCharacters() {
-    return this.getResource("/characters");
+  async getCharacter(id) {
+    const character = await this.getResource(`/characters/${id}`);
+    return this._transformCharacters(character);
+  }
+  _transformCharacters(char) {
+    return {
+      name: char.name,
+      gender: char.gender,
+      born: char.born,
+      died: char.died,
+      culture: char.culture
+    };
+  }
+  async getAllCharacters() {
+    const res = await this.getResource("/characters");
+    return res.map(this._transformCharacters);
   }
   getAllBooks() {
     return this.getResource("/books");
   }
+  _transformBooks(book) {
+    return {
+      name: book.name,
+      numberOfPages: book.numberOfPages,
+      publiser: book.publiser,
+      released: book.released
+    };
+  }
   getAllHouses() {
     return this.getResource("/houses");
+  }
+  _transformHouses(house) {
+    return {
+      name: house.name,
+      region: house.region,
+      words: house.words,
+      titles: house.titles,
+      overload: house.overload,
+      ancestralWeapons: house.ancestralWeapons
+    };
   }
 }
 
