@@ -2,17 +2,22 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "reactstrap";
 import Header from "../header";
 import RandomChar from "../randomChar";
-import ItemList from "../itemList";
-import CharDetails from "../charDetails";
+import ErrorMessage from "../errorMessage/errorMessage";
+import CharacterPage from "../characterPage/characterPage";
 import "./app.css";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      randomChar: true
+      randomChar: true,
+      error: false
     };
     this.toggleRandomChar = this.toggleRandomChar.bind(this);
+  }
+  componentDidCatch() {
+    console.log("error!");
+    this.setState({ error: true });
   }
   toggleRandomChar() {
     const { randomChar } = this.state;
@@ -21,6 +26,9 @@ export default class App extends Component {
   }
 
   render() {
+    if (this.state.error) {
+      return <ErrorMessage />;
+    }
     const { randomChar } = this.state;
     const buttonText = randomChar ? "Hide Char" : "Show Char";
     const content = randomChar ? <RandomChar /> : null;
@@ -45,14 +53,7 @@ export default class App extends Component {
               </div>
             </Col>
           </Row>
-          <Row>
-            <Col md="6">
-              <ItemList />
-            </Col>
-            <Col md="6">
-              <CharDetails />
-            </Col>
-          </Row>
+          <CharacterPage />
         </Container>
       </>
     );

@@ -18,16 +18,19 @@ export default class GotService extends Component {
     return this._transformCharacters(character);
   }
   _transformCharacters(char) {
+    const index = char.url.length - 2;
     return {
       name: char.name,
       gender: char.gender,
       born: char.born,
       died: char.died,
-      culture: char.culture
+      culture: char.culture,
+      id: char.url.slice(index)
     };
   }
   async getAllCharacters() {
-    const res = await this.getResource("/characters");
+    const res = await this.getResource("/characters?page=2&pageSize=10");
+    console.log(res);
     return res.map(this._transformCharacters);
   }
   getAllBooks() {

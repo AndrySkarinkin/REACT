@@ -5,10 +5,6 @@ import ErrorMessage from "../errorMessage/errorMessage";
 import "./randomChar.css";
 
 export default class RandomChar extends Component {
-  constructor(props) {
-    super(props);
-    this.updateChar();
-  }
   gotService = new GotService();
   state = {
     char: {},
@@ -26,12 +22,19 @@ export default class RandomChar extends Component {
   onCharLoaded = char => {
     this.setState({ char, loading: false });
   };
-  updateChar() {
+  updateChar = () => {
     const id = Math.floor(Math.random() * 110 + 20);
     this.gotService
       .getCharacter(id)
       .then(this.onCharLoaded)
       .catch(this.onError);
+  };
+  componentDidMount() {
+    this.updateChar();
+    setInterval(this.updateChar, 2000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerId);
   }
 
   render() {
