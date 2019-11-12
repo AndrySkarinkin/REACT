@@ -22,8 +22,8 @@ export default class App extends Component {
 
   render() {
     const { randomChar } = this.state;
-    const clas = randomChar ? null : " hide-char";
     const buttonText = randomChar ? "Hide Char" : "Show Char";
+    const content = randomChar ? <RandomChar /> : null;
     return (
       <>
         <Container>
@@ -38,7 +38,7 @@ export default class App extends Component {
               }}
             >
               <div className="random-char-wrap">
-                <RandomChar clas={clas} />
+                {content}
                 <button className="button-char" onClick={this.toggleRandomChar}>
                   {buttonText}
                 </button>

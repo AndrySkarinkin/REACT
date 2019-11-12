@@ -35,15 +35,13 @@ export default class RandomChar extends Component {
   }
 
   render() {
-    const { clas } = this.props;
     const { char, loading, error } = this.state;
     const content = !(loading || error) ? <View char={char} /> : null;
     const spinner = loading ? <Spinner /> : null;
     const errorMessage = error ? <ErrorMessage /> : null;
-    let resultClass = `random-block rounded ${clas}`;
 
     return (
-      <div className={resultClass}>
+      <div className="random-block rounded">
         {spinner}
         {content}
         {errorMessage}
