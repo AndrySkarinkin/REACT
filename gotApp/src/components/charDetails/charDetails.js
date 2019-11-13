@@ -6,29 +6,40 @@ export default class CharDetails extends Component {
   gotService = new GotService();
   state = {
     char: null,
-    loading: false
+    loading: true
   };
-
+  componentWillMount() {
+    console.log("will mount");
+  }
   componentDidMount() {
     this.updateChar();
   }
   componentDidUpdate(prevProps) {
     if (this.props.charId !== prevProps.charId) {
       this.updateChar();
+      console.log("update");
     }
+  }
+
+  componentWillUnmount() {
+    console.log("unmount");
   }
 
   updateChar() {
     const { charId } = this.props;
+    const { loading } = this.state;
     if (!charId) {
       return;
     }
     this.gotService.getCharacter(charId).then(char => {
-      this.setState({ char, loading: true });
+      this.setState({ char, loading: false });
     });
   }
   render() {
-    if (this.state.loading === false) {
+    if (this.state.loading === true) {
+      return <Spinner />;
+    }
+    if (this.state.updateState) {
       return <Spinner />;
     }
     if (!this.state.char) {
