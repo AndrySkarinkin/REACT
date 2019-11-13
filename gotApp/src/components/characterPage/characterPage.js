@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import ItemList from "../itemList";
 import CharDetails from "../charDetails";
 import ErrorMessage from "../errorMessage/errorMessage";
@@ -7,7 +7,7 @@ import ErrorMessage from "../errorMessage/errorMessage";
 export default class CharacterPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedChar: 130, error: false };
+    this.state = { selectedChar: null, error: false };
   }
   componentDidCatch() {
     console.log("error!");

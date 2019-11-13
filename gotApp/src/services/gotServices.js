@@ -30,7 +30,6 @@ export default class GotService extends Component {
   }
   async getAllCharacters() {
     const res = await this.getResource("/characters?page=2&pageSize=10");
-    console.log(res);
     return res.map(this._transformCharacters);
   }
   getAllBooks() {
@@ -58,18 +57,3 @@ export default class GotService extends Component {
     };
   }
 }
-
-const got = new GotService();
-
-got.getAllCharacters().then(result => {
-  console.log("Characters is:");
-  console.log(result);
-});
-got.getAllBooks().then(result => {
-  console.log("Books is:");
-  console.log(result);
-});
-got.getAllHouses().then(result => {
-  console.log("Houses is:");
-  console.log(result);
-});
