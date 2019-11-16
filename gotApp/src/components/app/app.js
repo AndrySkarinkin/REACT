@@ -3,7 +3,10 @@ import { Col, Row, Container } from "reactstrap";
 import Header from "../header";
 import RandomChar from "../randomChar";
 import ErrorMessage from "../errorMessage/errorMessage";
-import CharacterPage from "../characterPage/characterPage";
+import CharacterPage from "../pages/characterPage/characterPage";
+import BookPage from "../pages/booksPage/booksPage";
+import HousePage from "../pages/housesPage/housesPage";
+import GotService from "../../services/gotServices";
 import "./app.css";
 
 export default class App extends Component {
@@ -15,6 +18,7 @@ export default class App extends Component {
     };
     this.toggleRandomChar = this.toggleRandomChar.bind(this);
   }
+  gotService = new GotService();
   componentDidCatch() {
     console.log("error!");
     this.setState({ error: true });
@@ -53,7 +57,10 @@ export default class App extends Component {
               </div>
             </Col>
           </Row>
+
           <CharacterPage />
+          <BookPage />
+          <HousePage />
         </Container>
       </>
     );
