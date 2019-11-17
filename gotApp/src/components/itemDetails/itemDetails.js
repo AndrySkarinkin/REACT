@@ -55,11 +55,15 @@ export default class ItemDetails extends Component {
   render() {
     const { item, loading, error } = this.state;
     const { title } = this.props;
+    const data =
+      title === "book" ? (
+        <BookView childrens={this.props.children} item={item} title={title} />
+      ) : (
+        <View childrens={this.props.children} item={item} title={title} />
+      );
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error) ? (
-      <View childrens={this.props.children} item={item} title={title} />
-    ) : null;
+    const content = !(loading || error) ? data : null;
     return (
       <div className="char-details rounded">
         {errorMessage}
@@ -84,5 +88,22 @@ const View = ({ item, childrens, title }) => {
         })}
       </ul>
     </>
+  );
+};
+
+const BookView = ({ item, childrens, title }) => {
+  if (!item) {
+    return <span className="select-error">Please select a {title}</span>;
+  }
+  const { name } = item;
+  return (
+    <div className="book-wrap">
+      <h4 className="titles">{name}</h4>
+      <ul className="list-group list-group-flush book-descr">
+        {React.Children.map(childrens, child => {
+          return React.cloneElement(child, { item });
+        })}
+      </ul>
+    </div>
   );
 };

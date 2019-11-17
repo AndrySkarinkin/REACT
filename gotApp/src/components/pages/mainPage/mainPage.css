@@ -1,0 +1,21 @@
+.main-page {
+  color: white;
+  padding: 30px;
+  background: white;
+  text-align: center;
+  opacity: 0.6;
+}
+
+h1 {
+  color: black;
+  padding: 30px;
+  text-align: center;
+}
+h3 {
+  color: black;
+}
+.main-li {
+  color: black;
+  list-style: none;
+  font-size: 22px;
+}

@@ -3,6 +3,7 @@ import ItemList from "../../itemList";
 import ItemDetails, { Field } from "../../itemDetails";
 import ErrorMessage from "../../errorMessage/errorMessage";
 import GotService from "../../../services/gotServices";
+import RandomChar from "../../randomChar/randomChar";
 import RowBlock from "../../rowBlock/rowBlock";
 
 export default class HousePage extends Component {
@@ -37,6 +38,11 @@ export default class HousePage extends Component {
     if (this.state.error) {
       return <ErrorMessage />;
     }
-    return <RowBlock left={itemList} right={itemDetails} />;
+    return (
+      <div>
+        <RandomChar />
+        <RowBlock left={itemList} right={itemDetails} />
+      </div>
+    );
   }
 }

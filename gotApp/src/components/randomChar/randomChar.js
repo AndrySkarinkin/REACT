@@ -9,7 +9,8 @@ export default class RandomChar extends Component {
   state = {
     char: {},
     loading: true,
-    error: false
+    error: false,
+    randomChar: true
   };
 
   onError = err => {
@@ -29,6 +30,11 @@ export default class RandomChar extends Component {
       .then(this.onCharLoaded)
       .catch(this.onError);
   };
+  toggleRandomChar = () => {
+    const { randomChar } = this.state;
+    this.setState({ randomChar: !randomChar });
+    console.log(this.state);
+  };
   componentDidMount() {
     this.updateChar();
     setInterval(this.updateChar, 2000);
@@ -38,16 +44,20 @@ export default class RandomChar extends Component {
   }
 
   render() {
-    const { char, loading, error } = this.state;
-    const content = !(loading || error) ? <View char={char} /> : null;
+    const { char, loading, error, randomChar } = this.state;
+    const content = randomChar ? <View char={char} /> : null;
     const spinner = loading ? <Spinner /> : null;
     const errorMessage = error ? <ErrorMessage /> : null;
+    const buttonText = randomChar ? "Hide Char" : "Show Char";
 
     return (
-      <div className="random-block rounded">
+      <div className="random-char-wrap">
         {spinner}
         {content}
         {errorMessage}
+        <button className="button-char" onClick={this.toggleRandomChar}>
+          {buttonText}
+        </button>
       </div>
     );
   }
@@ -56,7 +66,7 @@ export default class RandomChar extends Component {
 const View = ({ char }) => {
   const { name, gender, born, died, culture } = char;
   return (
-    <div>
+    <div className="random-block rounded">
       <h4>Random Character: {name}</h4>
       <ul className="list-group list-group-flush">
         <li className="list-group-item d-flex justify-content-between">

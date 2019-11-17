@@ -14,3 +14,16 @@
   text-align: center;
   font-size: 26px;
 }
+.book-wrap {
+  width: 350px;
+  height: 500px;
+  padding: 30px;
+  background: url("./book-wrap.jpg");
+}
+.book-descr {
+  margin-bottom: 150px;
+}
+.titles {
+  color: red;
+  font-style: italic;
+}
