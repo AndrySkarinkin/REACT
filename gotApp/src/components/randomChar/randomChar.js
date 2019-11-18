@@ -1,66 +1,58 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import GotService from "../../services/gotServices";
 import Spinner from "../spinner/spinner";
 import ErrorMessage from "../errorMessage/errorMessage";
 import "./randomChar.css";
 
-export default class RandomChar extends Component {
-  gotService = new GotService();
-  state = {
-    char: {},
-    loading: true,
-    error: false,
-    randomChar: true
-  };
+function RandomChar() {
+  const gotService = new GotService();
+  const [char, changeChar] = useState([]);
+  const [loading, changeLoading] = useState(true);
+  const [error, changeError] = useState(false);
+  const [randomChar, changerandomChar] = useState(true);
+  useEffect(() => {
+    updateChar();
+    const timerId = setInterval(updateChar, 3000);
+    return function clear() {
+      clearInterval(timerId);
+    };
+  }, []);
 
-  onError = err => {
-    this.setState({
-      error: true,
-      loading: false
-    });
-  };
+  function onError(err) {
+    changeError(true);
+    changeLoading(false);
+  }
 
-  onCharLoaded = char => {
-    this.setState({ char, loading: false });
-  };
-  updateChar = () => {
+  function onCharLoaded(char) {
+    changeChar(char);
+    changeLoading(false);
+  }
+  function updateChar() {
     const id = Math.floor(Math.random() * 110 + 20);
-    this.gotService
+    gotService
       .getCharacter(id)
-      .then(this.onCharLoaded)
-      .catch(this.onError);
-  };
-  toggleRandomChar = () => {
-    const { randomChar } = this.state;
-    this.setState({ randomChar: !randomChar });
-    console.log(this.state);
-  };
-  componentDidMount() {
-    this.updateChar();
-    setInterval(this.updateChar, 2000);
+      .then(onCharLoaded)
+      .catch(onError);
   }
-  componentWillUnmount() {
-    clearInterval(this.timerId);
+  function toggleRandomChar() {
+    changerandomChar(!randomChar);
   }
 
-  render() {
-    const { char, loading, error, randomChar } = this.state;
-    const content = randomChar ? <View char={char} /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const buttonText = randomChar ? "Hide Char" : "Show Char";
+  const content = randomChar ? <View char={char} /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const buttonText = randomChar ? "Hide Char" : "Show Char";
 
-    return (
-      <div className="random-char-wrap">
-        {spinner}
-        {content}
-        {errorMessage}
-        <button className="button-char" onClick={this.toggleRandomChar}>
-          {buttonText}
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="random-char-wrap">
+      {spinner}
+      {content}
+      {errorMessage}
+      <button className="button-char" onClick={toggleRandomChar}>
+        {buttonText}
+      </button>
+    </div>
+  );
 }
 
 const View = ({ char }) => {
@@ -89,3 +81,5 @@ const View = ({ char }) => {
     </div>
   );
 };
+
+export default RandomChar;

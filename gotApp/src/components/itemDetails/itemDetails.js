@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import GotService from "../../services/gotServices";
+import React, { useState, useEffect } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorMessage from "../errorMessage/errorMessage";
 import "./itemDetails.css";
@@ -14,64 +13,49 @@ const Field = ({ item, field, label }) => {
 };
 
 export { Field };
-export default class ItemDetails extends Component {
-  gotService = new GotService();
-  state = {
-    item: null,
-    loading: false
-  };
+function ItemDetails({ itemId, getData, title, children }) {
+  const [item, updateList] = useState(null);
+  const [loading, toggleLoading] = useState(false);
+  const [error, toggleError] = useState(false);
+  useEffect(() => {
+    updateItem();
+  }, [itemId]);
 
-  componentDidMount() {
-    this.updateItem();
-    this.setState({
-      loading: false
-    });
+  function onError() {
+    toggleError(true);
+    toggleLoading(false);
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
-      this.updateItem();
-    }
-  }
-  onError = () => {
-    this.setState({
-      error: true,
-      loading: false
-    });
-  };
 
-  updateItem() {
-    const { itemId, getData } = this.props;
+  function updateItem() {
     if (!itemId) {
       return;
     }
 
     getData(itemId)
-      .then(this.setState({ loading: true }))
-      .then(item => {
-        this.setState({ item, loading: false });
+      .then(toggleLoading(true))
+      .then(items => {
+        toggleLoading(false);
+        updateList(items);
       })
-      .catch(this.onError);
+      .catch(onError);
   }
-  render() {
-    const { item, loading, error } = this.state;
-    const { title } = this.props;
-    const data =
-      title === "book" ? (
-        <BookView childrens={this.props.children} item={item} title={title} />
-      ) : (
-        <View childrens={this.props.children} item={item} title={title} />
-      );
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error) ? data : null;
-    return (
-      <div className="char-details rounded">
-        {errorMessage}
-        {spinner}
-        {content}
-      </div>
+
+  const data =
+    title === "book" ? (
+      <BookView childrens={children} item={item} title={title} />
+    ) : (
+      <View childrens={children} item={item} title={title} />
     );
-  }
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const content = !(loading || error) ? data : null;
+  return (
+    <div className="char-details rounded">
+      {errorMessage}
+      {spinner}
+      {content}
+    </div>
+  );
 }
 
 const View = ({ item, childrens, title }) => {
@@ -107,3 +91,5 @@ const BookView = ({ item, childrens, title }) => {
     </div>
   );
 };
+
+export default ItemDetails;
