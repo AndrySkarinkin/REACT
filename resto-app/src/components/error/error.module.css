@@ -1,0 +1,14 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: tomato;
+  height: 90vh;
+}
+.error {
+  font-size: 30px;
+  color: white;
+  border-bottom: 2px solid #000;
+  border-top: 2px solid #000;
+  padding: 20px;
+}
