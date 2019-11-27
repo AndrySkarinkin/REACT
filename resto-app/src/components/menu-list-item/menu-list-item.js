@@ -1,7 +1,7 @@
 import React from "react";
 import "./menu-list-item.scss";
 
-const MenuListItem = ({ menuItem }) => {
+const MenuListItem = ({ menuItem, onAddToCart, countTotal }) => {
   const { title, price, url, category } = menuItem;
   let icon = null;
 
@@ -32,7 +32,15 @@ const MenuListItem = ({ menuItem }) => {
         Price: <span>{price}$</span>
       </div>
       <img className="item-icon" src={icon} alt={icon}></img>
-      <button className="menu__btn">Add to cart</button>
+      <button
+        onClick={() => {
+          onAddToCart();
+          countTotal();
+        }}
+        className="menu__btn"
+      >
+        Add to cart
+      </button>
     </li>
   );
 };

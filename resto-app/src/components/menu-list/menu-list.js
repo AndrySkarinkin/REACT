@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import MenuListItem from "../menu-list-item";
 import { connect } from "react-redux";
 import WithRestoService from "../hoc";
-import { menuLoaded, menuRequsted, menuError } from "../../actions/";
+import {
+  menuLoaded,
+  menuRequsted,
+  menuError,
+  addToCart,
+  countTotal
+} from "../../actions/";
 import Spinner from "../spinner";
 import Error from "../error";
 
@@ -17,7 +23,7 @@ class MenuList extends Component {
       .catch(() => this.props.menuError());
   }
   render() {
-    const { menuItems, loading, error } = this.props;
+    const { menuItems, loading, error, addToCart, countTotal } = this.props;
     if (error) {
       return <Error />;
     }
@@ -28,7 +34,12 @@ class MenuList extends Component {
     return (
       <ul className="menu__list">
         {menuItems.map(menuItem => (
-          <MenuListItem key={menuItem.id} menuItem={menuItem} />
+          <MenuListItem
+            key={menuItem.id}
+            menuItem={menuItem}
+            onAddToCart={() => addToCart(menuItem.id)}
+            countTotal={countTotal}
+          />
         ))}
       </ul>
     );
@@ -49,7 +60,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(menuLoaded(newMenu));
     },
     menuRequsted: () => dispatch(menuRequsted()),
-    menuError: () => dispatch(menuError())
+    menuError: () => dispatch(menuError()),
+    addToCart: id => dispatch(addToCart(id)),
+    countTotal: () => dispatch(countTotal())
   };
 };
 
