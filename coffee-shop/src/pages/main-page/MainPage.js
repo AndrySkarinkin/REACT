@@ -3,7 +3,9 @@ import Header from "../../components/header/header";
 import MainScreen from "../../components/main-screen/main-screen";
 import AboutUs from "../../components/about-us/AboutUs";
 import Footer from "../../components/footer/footer";
+import CoffeShop from "../../components/coffee-shop/CoffeShop.js";
 import "../main-page/MainPage.sass";
+import mainBg from "../../img/paper.jpg";
 
 const MainPage = () => {
   return (
@@ -28,6 +30,12 @@ const MainPage = () => {
           "Now residence dashwoods she excellent you. Shade being under his bed her, Much read on as draw. Blessing for ignorant exercise any yourself unpacked. Pleasant horrible but confined day end marriage. Eagerness furniture set preserved far recommend. Did even but nor are most gave hope. Secure active living depend sonrepair day ladies now."
         ]}
       />
+      <CoffeShop
+        background={mainBg}
+        urlTitle={"bestsellers"}
+        sectionTitle={"Our best"}
+      />
+
       <Footer />
     </div>
   );

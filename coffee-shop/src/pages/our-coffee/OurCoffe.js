@@ -2,6 +2,9 @@ import React from "react";
 import "./OurCoffee.sass";
 import Header from "../../components/header/header";
 import AboutUs from "../../components/about-us/AboutUs";
+import FilterPanel from "../../components/filter-panel/FilterPanel";
+import SearchPanel from "../../components/search-panel/SearchPanel";
+import CoffeShop from "../../components/coffee-shop/CoffeShop";
 import Footer from "../../components/footer/footer";
 import img from "../../img/coffee_girl.jpg";
 
@@ -30,6 +33,11 @@ const OurCoffee = () => {
           "spot shy want. Children me laughing we prospect answered followed. At it wentis song that held help face."
         ]}
       />
+      <div className="serching-panel">
+        <SearchPanel />
+        <FilterPanel />
+      </div>
+      <CoffeShop background={null} urlTitle={"coffee"} />
       <Footer />
     </div>
   );

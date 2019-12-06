@@ -3,12 +3,6 @@ import aboutLogo from "../../logo/Beans_logo_dark.svg";
 import "bootstrap/dist/css/bootstrap.css";
 import "./AboutUs.sass";
 
-/* let key = 0;
-
-function incKey(key) {
-  return ++key;
-} */
-
 const Item = ({ text }) => {
   return <div>{text}</div>;
 };

@@ -2,6 +2,7 @@ import React from "react";
 import "./pleasure.sass";
 import Header from "../../components/header/header";
 import AboutUs from "../../components/about-us/AboutUs";
+import CoffeShop from "../../components/coffee-shop/CoffeShop";
 import Footer from "../../components/footer/footer";
 import img from "../../img/cup.png";
 
@@ -29,6 +30,7 @@ const Pleasure = () => {
           "met spot shy want. Children me laughing we prospect answered followed. At it went is song that held help face."
         ]}
       />
+      <CoffeShop background={null} urlTitle={"coffee"} />
       <Footer />
     </div>
   );
