@@ -45,7 +45,6 @@ const reducer = (state = initialState, action) => {
       }
     case "FILTER-ITEMS":
       const filter = action.filter;
-      console.log(filter);
       const filterData = state.data.filter(el => el.country === filter);
       return {
         ...state,

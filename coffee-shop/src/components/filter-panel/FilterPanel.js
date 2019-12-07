@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import "./FilterPanel.sass";
 import WithService from "../../hoc/hoc";
-import Spinner from "../spinner/spinner";
 import { filterItems, dataLoaded, dataRequsted } from "../../actions/actions";
 import { connect } from "react-redux";
 
@@ -13,11 +13,21 @@ class FilterPanel extends Component {
       .then(res => this.props.dataLoaded(res))
       .catch(() => this.props.dataError());
   }
+
+  addActiveClass(e) {
+    e.currentTarget.childNodes.forEach(el => {
+      if (el.classList.contains("filter-active")) {
+        el.classList.remove("filter-active");
+      }
+    });
+    e.target.classList.add("filter-active");
+  }
+
   render() {
     return (
       <div className="filter-wrap">
         <div className="filter-title">Or filter</div>
-        <div className="filter-check">
+        <div className="filter-check" onClick={e => this.addActiveClass(e)}>
           <div
             onClick={async () => {
               await this.getData();
@@ -44,6 +54,9 @@ class FilterPanel extends Component {
             className="filter-check-item"
           >
             Columbia
+          </div>
+          <div onClick={() => this.getData()} className="filter-check-item">
+            All
           </div>
         </div>
       </div>

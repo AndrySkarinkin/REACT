@@ -9,8 +9,8 @@ export default class ErrorBoundry extends Component {
   render() {
     if (this.state.error) {
       return <Error />;
+    } else {
+      return this.props.children;
     }
-
-    return this.props.children;
   }
 }

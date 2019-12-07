@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import MainPage from "../pages/main-page/MainPage";
 import OurCoffee from "../pages/our-coffee/OurCoffe";
 import Pleasure from "../pages/pleasure/Pleasure";
+import Error from "../components/error/Error";
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
 
         <Route path="/pleasure">
           <Pleasure />
+        </Route>
+        <Route path="*">
+          <Error />
         </Route>
       </Switch>
     </>
