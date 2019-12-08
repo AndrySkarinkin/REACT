@@ -48,7 +48,11 @@ class OurCoffe extends Component {
           <SearchPanel />
           <FilterPanel />
         </div>
-        <CoffeShop background={null} urlTitle={"coffee"} />
+        <CoffeShop
+          background={null}
+          urlTitle={"coffee"}
+          pageTitle="our-coffee/"
+        />
         <Footer />
       </div>
     );

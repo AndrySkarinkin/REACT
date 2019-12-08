@@ -44,6 +44,7 @@ class MainPage extends Component {
           background={mainBg}
           urlTitle={"bestsellers"}
           sectionTitle={"Our best"}
+          pageTitle=""
         />
 
         <Footer />

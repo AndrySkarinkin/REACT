@@ -17,7 +17,15 @@ class CoffeeShop extends Component {
   }
 
   render() {
-    const { data, loading, error, background, sectionTitle } = this.props;
+    const {
+      data,
+      loading,
+      error,
+      background,
+      sectionTitle,
+      urlTitle,
+      pageTitle
+    } = this.props;
     if (error) {
       return <Error />;
     }
@@ -35,7 +43,12 @@ class CoffeeShop extends Component {
         <h1 className="main-title">{sectionTitle}</h1>
         <div className="list">
           {data.map((item, num) => (
-            <CoffeeItem key={num} item={item} />
+            <CoffeeItem
+              key={num}
+              item={item}
+              link={urlTitle}
+              pageTitle={pageTitle}
+            />
           ))}
         </div>
       </div>

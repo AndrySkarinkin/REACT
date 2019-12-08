@@ -40,7 +40,7 @@ class Pleasure extends Component {
             "met spot shy want. Children me laughing we prospect answered followed. At it went is song that held help face."
           ]}
         />
-        <CoffeShop background={null} urlTitle={"coffee"} />
+        <CoffeShop background={null} urlTitle={"coffee"} pageTitle={null} />
         <Footer />
       </div>
     );

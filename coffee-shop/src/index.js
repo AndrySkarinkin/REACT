@@ -13,10 +13,9 @@ import store from "./store";
 //import CoffeeShop from "../src/components/coffee-shop/CoffeShop";
 
 /* ReactDOM.render(
-  <div>
-    <FilterPanel />
+   <div>
+    <CurrentCoffeePage />
   </div>,
-
   document.getElementById("root")
 ); */
 
