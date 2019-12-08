@@ -3,17 +3,28 @@ import "./CurrentCoffePage.sass";
 import Header from "../../components/header/header";
 import CurrentCoffee from "../../components/current-coffee/CurrentCoffee";
 import Footer from "../../components/footer/footer";
-import { setCurrentCoffee } from "../../actions/actions";
+import WithService from "../../hoc/hoc";
+import {
+  setCurrentCoffee,
+  dataLoaded,
+  dataRequsted,
+  dataError
+} from "../../actions/actions";
 import { connect } from "react-redux";
 
 class CurrentCoffeePage extends Component {
   constructor(props) {
     super(props);
-    this.props.setCurrentCoffee(this.props.id);
+    this.props.dataRequsted();
+    const { Service } = this.props;
+    Service.getItems("coffee")
+      .then(res => this.props.dataLoaded(res))
+      .catch(() => this.props.dataError());
   }
   componentDidMount() {
     this.props.setCurrentCoffee(this.props.id);
   }
+
   render() {
     const { coffee } = this.props;
     const [data] = coffee;
@@ -38,7 +49,8 @@ class CurrentCoffeePage extends Component {
 
 const mapStateToProps = state => {
   return {
-    coffee: state.currentCoffee
+    coffee: state.currentCoffee,
+    mas: state.data
   };
 };
 
@@ -46,8 +58,15 @@ const mapDispatchToProps = dispatch => {
   return {
     setCurrentCoffee: currentCoffee => {
       dispatch(setCurrentCoffee(currentCoffee));
-    }
+    },
+    dataLoaded: newData => {
+      dispatch(dataLoaded(newData));
+    },
+    dataRequsted: () => dispatch(dataRequsted()),
+    dataError: () => dispatch(dataError())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentCoffeePage);
+export default WithService()(
+  connect(mapStateToProps, mapDispatchToProps)(CurrentCoffeePage)
+);

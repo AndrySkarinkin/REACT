@@ -12,7 +12,7 @@ const CurrentCoffee = props => {
       <div className="current-coffee-info">
         <div className="current-coffee-name">{data.name}</div>
         <div className="logo-wrap">
-          <img className="beanslogo" src={aboutLogo} alt="Beans logo"></img>
+          <img className="beans-logo" src={aboutLogo} alt="Beans logo"></img>
         </div>
 
         <div className="current-coffee-country">

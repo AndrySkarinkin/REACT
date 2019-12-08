@@ -28,6 +28,7 @@ const App = () => {
             return <CurrentCoffeePage id={id} />;
           }}
         />
+
         <Route
           path="/:id"
           render={({ match }) => {
